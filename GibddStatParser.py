@@ -210,21 +210,22 @@ def getDTPInfo(data_root, year, months, regions, region_id="0"):
                   format(region["name"], district["name"], months[0], months[-1], year)
             print(log_text)
             write_log(log_text)
-            cards = getDTPData(region["id"], region["name"], district["id"], district["name"], months, year)
-            # debug
-            # if "Тюмень" in district["name"]:
-            #     for card in cards:
-            #         print("дата: {}-{}, район: {}, вид: {}, адрес: {}, {}, {}, погибло: {}, ранено: {}, кол.ТС: {}, кол. участников: {}".
-            #               format(card["date"], card["Time"], card["District"], card["DTP_V"], card["infoDtp"]["n_p"], card["infoDtp"]["street"],
-            #                      card["infoDtp"]["house"], card["POG"], card["RAN"], card["K_TS"], card["K_UCH"]))
-            if cards == None:
-                continue
+            for month in months:
+                cards = getDTPData(region["id"], region["name"], district["id"], district["name"], [month], year)
+                # debug
+                # if "Тюмень" in district["name"]:
+                #     for card in cards:
+                #         print("дата: {}-{}, район: {}, вид: {}, адрес: {}, {}, {}, погибло: {}, ранено: {}, кол.ТС: {}, кол. участников: {}".
+                #               format(card["date"], card["Time"], card["District"], card["DTP_V"], card["infoDtp"]["n_p"], card["infoDtp"]["street"],
+                #                      card["infoDtp"]["house"], card["POG"], card["RAN"], card["K_TS"], card["K_UCH"]))
+                if cards == None:
+                    continue
 
-            log_text = u"{0} ДТП для {1} ({2}) за {3}-{4}.{5}".format(len(cards), region["name"], district["name"],
-                                                                      months[0], months[len(months) - 1], year)
-            print(log_text)
-            write_log(log_text)
-            dtp_dict["data"]["cards"] += cards
+                log_text = u"{0} ДТП для {1} ({2}) за {3}.{4}".format(len(cards), region["name"], district["name"],
+                                                                          month, year)
+                print(log_text)
+                write_log(log_text)
+                dtp_dict["data"]["cards"] += cards
 
         dtp_dict_json = {}
         dtp_dict_json["data"] = json.dumps(dtp_dict["data"]).encode('utf8').decode('unicode-escape')
