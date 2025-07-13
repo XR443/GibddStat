@@ -1,0 +1,336 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Traffic Accident Report",
+  "description": "Schema for pedestrian collision accident data",
+  "type": "object",
+  "properties": {
+    "KartId": {
+      "type": "integer",
+      "description": "Unique accident identifier"
+    },
+    "rowNum": {
+      "type": "integer",
+      "description": "Row number in source data"
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "pattern": "^\\d{2}\\.\\d{2}\\.\\d{4}$",
+      "description": "Date of accident (DD.MM.YYYY)"
+    },
+    "Time": {
+      "type": "string",
+      "pattern": "^([0-1][0-9]|2[0-3]):[0-5][0-9]$",
+      "description": "Time of accident (HH:MM)"
+    },
+    "District": {
+      "type": "string",
+      "description": "Administrative district where accident occurred"
+    },
+    "DTP_V": {
+      "type": "string",
+      "description": "Type of accident",
+      "enum": ["Наезд на пешехода", "Столкновение", "Опрокидывание", "Наезд на препятствие", "Наезд на животное", "Падение пассажира", "Иной вид ДТП"]
+    },
+    "POG": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of fatalities"
+    },
+    "RAN": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Number of injured"
+    },
+    "K_TS": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Number of vehicles involved"
+    },
+    "K_UCH": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Total number of participants"
+    },
+    "emtp_number": {
+      "type": "string",
+      "pattern": "^\\d{9}$",
+      "description": "Accident registration number"
+    },
+    "infoDtp": {
+      "type": "object",
+      "properties": {
+        "ndu": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Undefined elements in accident"
+          }
+        },
+        "sdor": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Road section characteristics"
+          }
+        },
+        "ts_info": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "n_ts": {
+                "type": "string",
+                "description": "Vehicle sequence number"
+              },
+              "ts_s": {
+                "type": "string",
+                "description": "Vehicle status after accident"
+              },
+              "t_ts": {
+                "type": "string",
+                "description": "Vehicle class/type"
+              },
+              "marka_ts": {
+                "type": "string",
+                "description": "Vehicle brand"
+              },
+              "m_ts": {
+                "type": "string",
+                "description": "Vehicle model"
+              },
+              "color": {
+                "type": "string",
+                "description": "Vehicle color"
+              },
+              "r_rul": {
+                "type": "string",
+                "description": "Drive type"
+              },
+              "g_v": {
+                "type": "string",
+                "description": "Manufacture year"
+              },
+              "m_pov": {
+                "type": "string",
+                "description": "Trailer information"
+              },
+              "t_n": {
+                "type": "string",
+                "description": "Technical faults"
+              },
+              "f_sob": {
+                "type": "string",
+                "description": "Ownership form"
+              },
+              "o_pf": {
+                "type": "string",
+                "description": "Owner type"
+              },
+              "ts_uch": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "K_UCH": {
+                      "type": "string",
+                      "description": "Participant role"
+                    },
+                    "NPDD": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "description": "Traffic rule violations"
+                      }
+                    },
+                    "S_T": {
+                      "type": "string",
+                      "description": "Injury status"
+                    },
+                    "POL": {
+                      "type": "string",
+                      "description": "Gender"
+                    },
+                    "V_ST": {
+                      "type": "string",
+                      "description": "Age"
+                    },
+                    "ALCO": {
+                      "type": "string",
+                      "description": "Alcohol test result"
+                    },
+                    "SOP_NPDD": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "description": "Additional violations"
+                      }
+                    },
+                    "SAFETY_BELT": {
+                      "type": "string",
+                      "description": "Seatbelt usage"
+                    },
+                    "S_SM": {
+                      "type": "string",
+                      "description": "Fled scene indicator"
+                    },
+                    "N_UCH": {
+                      "type": "string",
+                      "description": "Participant sequence number"
+                    },
+                    "S_SEAT_GROUP": {
+                      "type": "string",
+                      "description": "Seating position"
+                    },
+                    "INJURED_CARD_ID": {
+                      "type": "string",
+                      "description": "Medical injury card ID"
+                    }
+                  },
+                  "required": ["K_UCH", "S_T", "POL", "N_UCH"]
+                }
+              }
+            },
+            "required": ["n_ts", "marka_ts", "ts_uch"]
+          }
+        },
+        "n_p": {
+          "type": "string",
+          "description": "Settlement name"
+        },
+        "street": {
+          "type": "string",
+          "description": "Street name"
+        },
+        "house": {
+          "type": "string",
+          "description": "House number"
+        },
+        "dor": {
+          "type": "string",
+          "description": "Road name"
+        },
+        "km": {
+          "type": "string",
+          "description": "Kilometer mark"
+        },
+        "m": {
+          "type": "string",
+          "description": "Meter mark"
+        },
+        "k_ul": {
+          "type": "string",
+          "description": "Street category"
+        },
+        "dor_k": {
+          "type": "string",
+          "description": "Road category"
+        },
+        "dor_z": {
+          "type": "string",
+          "description": "Road ownership type"
+        },
+        "factor": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Contributing factors"
+          }
+        },
+        "s_pog": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Weather conditions"
+          }
+        },
+        "s_pch": {
+          "type": "string",
+          "description": "Road surface condition"
+        },
+        "osv": {
+          "type": "string",
+          "description": "Lighting conditions"
+        },
+        "change_org_motion": {
+          "type": "string",
+          "description": "Traffic organization changes"
+        },
+        "s_dtp": {
+          "type": "string",
+          "description": "Accident scheme number"
+        },
+        "COORD_W": {
+          "type": "string",
+          "pattern": "^[-+]?[0-9]*\\.?[0-9]+$",
+          "description": "Longitude coordinate"
+        },
+        "COORD_L": {
+          "type": "string",
+          "pattern": "^[-+]?[0-9]*\\.?[0-9]+$",
+          "description": "Latitude coordinate"
+        },
+        "OBJ_DTP": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Nearby objects"
+          }
+        },
+        "uchInfo": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "K_UCH": {
+                "type": "string",
+                "description": "Participant role"
+              },
+              "NPDD": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "description": "Traffic rule violations"
+                }
+              },
+              "S_T": {
+                "type": "string",
+                "description": "Injury status"
+              },
+              "POL": {
+                "type": "string",
+                "description": "Gender"
+              },
+              "V_ST": {
+                "type": "string",
+                "description": "Age"
+              },
+              "ALCO": {
+                "type": "string",
+                "description": "Alcohol test result"
+              },
+              "SOP_NPDD": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "description": "Additional violations"
+                }
+              },
+              "S_SM": {
+                "type": "string",
+                "description": "Fled scene indicator"
+              },
+              "N_UCH": {
+                "type": "string",
+                "description": "Participant sequence number"
+              }
+            },
+            "required": ["K_UCH", "S_T", "POL", "N_UCH"]
+          }
+        }
+      },
+      "required": ["COORD_W", "COORD_L", "ts_info", "uchInfo"]
+    }
+  },
+  "required": ["KartId", "date", "Time", "DTP_V", "infoDtp"]
+}
